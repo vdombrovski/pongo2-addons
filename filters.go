@@ -23,6 +23,7 @@ func init() {
 	// Regulars
 	pongo2.RegisterFilter("slugify", filterSlugify)
 	pongo2.RegisterFilter("filesizeformat", filterFilesizeformat)
+	pongo2.RegisterFilter("ifilesizeformat", filterIFilesizeformat)
 	pongo2.RegisterFilter("truncatesentences", filterTruncatesentences)
 	pongo2.RegisterFilter("truncatesentences_html", filterTruncatesentencesHTML)
 	pongo2.RegisterFilter("random", filterRandom)
@@ -48,6 +49,10 @@ func filterSlugify(in *pongo2.Value, param *pongo2.Value) (*pongo2.Value, *pongo
 }
 
 func filterFilesizeformat(in *pongo2.Value, param *pongo2.Value) (*pongo2.Value, *pongo2.Error) {
+	return pongo2.AsValue(humanize.Bytes(uint64(in.Integer()))), nil
+}
+
+func filterIFilesizeformat(in *pongo2.Value, param *pongo2.Value) (*pongo2.Value, *pongo2.Error) {
 	return pongo2.AsValue(humanize.IBytes(uint64(in.Integer()))), nil
 }
 

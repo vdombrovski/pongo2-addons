@@ -32,7 +32,8 @@ func (s *TestSuite1) TestFilters(c *C) {
 	c.Assert(getResult("{{ \"this is ä test!\"|slugify }}", nil), Equals, "this-is-a-test")
 
 	// Filesizeformat
-	c.Assert(getResult("{{ 123456789|filesizeformat }}", nil), Equals, "118MiB")
+	c.Assert(getResult("{{ 123456789|ifilesizeformat }}", nil), Equals, "118MiB")
+	c.Assert(getResult("{{ 123456789|filesizeformat }}", nil), Equals, "123MB")
 
 	// Timesince/timeuntil
 	baseDate := time.Date(2014, time.February, 1, 8, 30, 00, 00, time.UTC)
